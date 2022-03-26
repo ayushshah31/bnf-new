@@ -186,6 +186,7 @@ class _HomeState extends State<Home> {
               hintText: 'Enter Card N0.',
             ),
           ),
+          ElevatedButton(onPressed: (){}, child: Text("Submit"))
         ],
       ),
     );
