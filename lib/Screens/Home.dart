@@ -26,13 +26,13 @@ class _HomeState extends State<Home> {
   String dropValue = "ICICI";
   final FirebaseAuth _auth = FirebaseAuth.instance;
   SingingCharacter? _character = SingingCharacter.debit;
-  int _selectedIndex=0;
+  int _selectedIndex = 0;
   var cardNo = 0;
   late List<OfferDataModel> data;
 
   static List<Widget> _pages = <Widget>[];
 
-  void onItemTapped(int index){
+  void onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -49,6 +49,7 @@ class _HomeState extends State<Home> {
     ];
   }
 
+  bool _showEnterCard = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,12 +87,28 @@ class _HomeState extends State<Home> {
         ),
         body: _pages.elementAt(_selectedIndex));
   }
-  Widget profile(){
+
+  Widget profile() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          Row(children: [
+            Expanded(
+                child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _showEnterCard = true;
+                      });
+                    },
+                    child: Text("Add"))),
+            SizedBox(
+              width: 20,
+            ),
+            Expanded(
+                child: ElevatedButton(onPressed: () {}, child: Text("View")))
+          ]),
           Text(
             "Choose type of card:",
             style: TextStyle(fontSize: 15),
@@ -154,7 +171,9 @@ class _HomeState extends State<Home> {
               fontSize: 20,
             ),
           ),
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           TextField(
             keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
@@ -172,6 +191,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-
-
