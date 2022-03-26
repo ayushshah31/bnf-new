@@ -46,7 +46,7 @@ class FirebaseFetch{
     // }
   }
 
-  Future getEvents() async {
+  Future<List<OfferDataModel>> getEvents() async {
     var result = (await databaseReference.child("Bank").child("Axis").once()).value;
     print(result.runtimeType);
     List<OfferDataModel> events = [];
@@ -58,7 +58,7 @@ class FirebaseFetch{
       user.dueDate = child["Due Date"];
       user.url = child["Link"];
       events.add(user);
-      print(user.brandName);
+      // print(user.brandName);
     }
     return events;
   }

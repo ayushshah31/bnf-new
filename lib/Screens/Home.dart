@@ -8,6 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bnf/constants.dart';
 import 'package:bnf/dataFetch/FirebaseFetch.dart';
 
+import 'offerDisplay.dart';
+
 enum SingingCharacter { debit, credit }
 
 class Home extends StatefulWidget {
@@ -43,19 +45,7 @@ class _HomeState extends State<Home> {
     _pages = [
       profile(),
       ImageCapture(),
-      Center(
-        child:TextButton(
-          child: Text("press"),
-          onPressed: () async{
-            FirebaseFetch dataFetch = new FirebaseFetch();
-            // data = await dataFetch.getOfferDetails("Axis");
-            // dataFetch.getTp();
-            setState(() {
-              dataFetch.getEvents();
-            });
-          },
-        )
-      )
+      OffersDisplay(),
     ];
   }
 
