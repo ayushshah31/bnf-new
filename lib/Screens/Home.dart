@@ -79,16 +79,16 @@ class _HomeState extends State<Home> {
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.call),
-              label: 'Calls',
+              icon: Icon(Icons.card_membership),
+              label: 'Add Cards',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.camera),
               label: 'Camera',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.chat),
-              label: 'Chats',
+              icon: Icon(Icons.local_offer),
+              label: 'Offers',
             ),
           ],
           currentIndex: _selectedIndex,
