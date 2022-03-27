@@ -19,6 +19,7 @@ class _ImageCaptureState extends State<ImageCapture> {
   String? path = "";
   String finalText = "";
   String displayText = "";
+  List<String> textList = [];
   late File imagePath;
   void captureImage() async {
     XFile? image =
@@ -44,6 +45,7 @@ class _ImageCaptureState extends State<ImageCapture> {
         finalText = finalText + "\n";
       }
     }
+    textList.add(finalText);
     setState(() {
       show_image = true;
       displayText = finalText;
@@ -62,7 +64,10 @@ class _ImageCaptureState extends State<ImageCapture> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  child: Text("Capture Image"),
+                  child: Text("Capture Image",style: TextStyle(fontSize: 20),),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey.shade700),
+                  ),
                   onPressed: () {
                     captureImage();
                     setState(() {
@@ -72,6 +77,7 @@ class _ImageCaptureState extends State<ImageCapture> {
                   },
                 ),
                 Card(
+                  margin: EdgeInsets.all(10),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   child: Container(

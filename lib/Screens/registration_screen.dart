@@ -115,7 +115,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             FirebaseDatabase.instance.reference();
                         DatabaseReference mUserPointsRef =
                             databaseReference.child('User');
-                        mUserPointsRef.set(mFirebaseUser?.uid);
                         mUserPointsRef
                             .child(mFirebaseUser!.uid)
                             .child("Name")

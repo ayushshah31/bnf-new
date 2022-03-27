@@ -2,6 +2,7 @@
 
 import 'package:bnf/Model/offerDataModel.dart';
 import 'package:bnf/Screens/Profile.dart';
+import 'package:bnf/Screens/addCard.dart';
 import 'package:bnf/Screens/imageCapture.dart';
 import 'package:bnf/Screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -29,9 +30,10 @@ class _HomeState extends State<Home> {
   late List<OfferDataModel> data;
 
   static List<Widget> _pages = [
-    Profile(),
+    AddCard(),
     ImageCapture(),
     OffersDisplay(),
+    Profile(),
   ];
 
   void onItemTapped(int index) {
