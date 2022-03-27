@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:bnf/Model/offerDataModel.dart';
+import 'package:bnf/Screens/Profile.dart';
 import 'package:bnf/Screens/imageCapture.dart';
 import 'package:bnf/Screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,14 +24,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String cc = "";
-  String dropValue = "ICICI";
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  SingingCharacter? _character = SingingCharacter.debit;
   int _selectedIndex=0;
-  var cardNo = 0;
   late List<OfferDataModel> data;
 
-  static List<Widget> _pages = <Widget>[];
+  static List<Widget> _pages = [
+    Profile(),
+    ImageCapture(),
+    OffersDisplay(),
+  ];
 
   void onItemTapped(int index){
     setState(() {
@@ -42,11 +44,7 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _pages = [
-      profile(),
-      ImageCapture(),
-      OffersDisplay(),
-    ];
+
   }
 
   @override
@@ -66,6 +64,8 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
+        body: _pages.elementAt(_selectedIndex),
+
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -84,93 +84,9 @@ class _HomeState extends State<Home> {
           currentIndex: _selectedIndex,
           onTap: onItemTapped,
         ),
-        body: _pages.elementAt(_selectedIndex));
+        );
   }
-  Widget profile(){
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            "Choose type of card:",
-            style: TextStyle(fontSize: 15),
-          ),
-          ListTile(
-            title: const Text('Debit'),
-            leading: Radio<SingingCharacter>(
-              value: SingingCharacter.debit,
-              groupValue: _character,
-              onChanged: (SingingCharacter? value) {
-                setState(() {
-                  _character = value;
-                });
-              },
-            ),
-          ),
-          ListTile(
-            title: const Text('Credit'),
-            leading: Radio<SingingCharacter>(
-              value: SingingCharacter.credit,
-              groupValue: _character,
-              onChanged: (SingingCharacter? value) {
-                setState(() {
-                  _character = value;
-                });
-              },
-            ),
-          ),
-          Row(
-            children: [
-              Text(
-                "Choose bank:",
-                style: TextStyle(fontSize: 15),
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              DropdownButton<String>(
-                value: dropValue,
-                items: <String>['ICICI', 'Axis', 'HDFC', 'PNB']
-                    .map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                    ),
-                  );
-                }).toList(),
-                onChanged: (val) {
-                  setState(() {
-                    dropValue = val!;
-                  });
-                },
-              ),
-            ],
-          ),
-          Text(
-            cardNo.toString(),
-            style: TextStyle(
-              fontSize: 20,
-            ),
-          ),
-          SizedBox(height: 30,),
-          TextField(
-            keyboardType: TextInputType.number,
-            textAlign: TextAlign.center,
-            onChanged: (value) {
-              setState(() {
-                cardNo = int.parse(value);
-              });
-            },
-            decoration: kTextFieldDecoration.copyWith(
-              hintText: 'Enter Card N0.',
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
 }
 
 

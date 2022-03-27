@@ -1,7 +1,9 @@
 import 'package:bnf/Model/offerDataModel.dart';
+import 'package:bnf/components/cards.dart';
 import 'package:flutter/material.dart';
 import 'package:bnf/dataFetch/FirebaseFetch.dart';
 import 'package:modal_progress_hud_alt/modal_progress_hud_alt.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OffersDisplay extends StatefulWidget {
   const OffersDisplay({Key? key}) : super(key: key);
@@ -40,9 +42,40 @@ class _OffersDisplayState extends State<OffersDisplay> {
         inAsyncCall: isLoading,
         child: SingleChildScrollView(
           child: Center(
-              child:TextButton(
-                child: Text("press"),
-                onPressed: () {},
+              child:Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Offers for AXIS BANK",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Container(
+                      height: 170,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: data.length,
+                        itemBuilder: (BuildContext context, int i) {
+                          return Row(
+                            children: [
+                              Cards(desc: data[i].details,exp: data[i].dueDate,link: data[i].url,name: data[i].brandName,),
+                            ],
+                          );
+                          },
+                        separatorBuilder:
+                            (BuildContext context, int index) {
+                          return SizedBox(
+                            width: 10,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               )
           ),
         ),

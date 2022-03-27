@@ -16,35 +16,45 @@ class Cards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: EdgeInsets.all(10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       elevation: 5,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Text(
-          name,
-          style: TextStyle(fontSize: 15),
-        ),
-        Text(
-          desc,
-          style: TextStyle(fontSize: 12),
-        ),
-        Text(
-          exp,
-          style: TextStyle(fontSize: 12),
-        ),
-        TextButton(
-            onPressed: () async {
-              var url = link;
-              if (await canLaunch(url)) {
-                await launch(url);
-              } else {
-                throw 'couldnt launch $url';
-              }
-            },
-            child: Text(
-              link,
-              style: TextStyle(fontSize: 12),
-            ))
-      ]),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          SizedBox(width: 20,),
+          Text(
+            name,
+            style: TextStyle(fontSize: 15),
+          ),
+          SizedBox(height: 10,),
+          Text(
+            desc,
+            style: TextStyle(fontSize: 12),
+          ),
+          SizedBox(height: 10,),
+          Text(
+            exp,
+            style: TextStyle(fontSize: 12),
+          ),
+          SizedBox(height: 10,),
+          TextButton(
+              onPressed: () async {
+                var url = link;
+                if (await canLaunch(url)) {
+                  await launch(url);
+                } else {
+                  throw 'couldnt launch $url';
+                }
+              },
+              child: Text(
+                'For More Details...',
+                textWidthBasis: TextWidthBasis.parent,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 12),
+              ))
+        ]),
+      ),
     );
   }
 }
