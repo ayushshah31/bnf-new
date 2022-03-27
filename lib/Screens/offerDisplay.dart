@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:bnf/Model/offerDataModel.dart';
 import 'package:bnf/components/cards.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,6 @@ class OffersDisplay extends StatefulWidget {
 }
 
 class _OffersDisplayState extends State<OffersDisplay> {
-
   bool isLoading = true;
   List<OfferDataModel> data = <OfferDataModel>[];
 
@@ -24,7 +25,7 @@ class _OffersDisplayState extends State<OffersDisplay> {
     fns();
   }
 
-  void fns() async{
+  void fns() async {
     FirebaseFetch dataFetch = new FirebaseFetch();
     data = await dataFetch.getEvents();
     setState(() {
@@ -42,41 +43,45 @@ class _OffersDisplayState extends State<OffersDisplay> {
         inAsyncCall: isLoading,
         child: SingleChildScrollView(
           child: Center(
-              child:Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Offers for AXIS BANK",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: Text(
+                    "Offers for AXIS BANK",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Container(
-                      height: 170,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: data.length,
-                        itemBuilder: (BuildContext context, int i) {
-                          return Row(
-                            children: [
-                              Cards(desc: data[i].details,exp: data[i].dueDate,link: data[i].url,name: data[i].brandName,),
-                            ],
-                          );
-                          },
-                        separatorBuilder:
-                            (BuildContext context, int index) {
-                          return SizedBox(
-                            width: 10,
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              )
+                Container(
+                  height: 170,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: data.length,
+                    itemBuilder: (BuildContext context, int i) {
+                      return Row(
+                        children: [
+                          Cards(
+                            desc: data[i].details,
+                            exp: data[i].dueDate,
+                            link: data[i].url,
+                            name: data[i].brandName,
+                          ),
+                        ],
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        width: 10,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

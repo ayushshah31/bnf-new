@@ -20,40 +20,51 @@ class Cards extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       elevation: 5,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(width: 20,),
-          Text(
-            name,
-            style: TextStyle(fontSize: 15),
-          ),
-          SizedBox(height: 10,),
-          Text(
-            desc,
-            style: TextStyle(fontSize: 12),
-          ),
-          SizedBox(height: 10,),
-          Text(
-            exp,
-            style: TextStyle(fontSize: 12),
-          ),
-          SizedBox(height: 10,),
-          TextButton(
-              onPressed: () async {
-                var url = link;
-                if (await canLaunch(url)) {
-                  await launch(url);
-                } else {
-                  throw 'couldnt launch $url';
-                }
-              },
-              child: Text(
-                'For More Details...',
-                textWidthBasis: TextWidthBasis.parent,
-                overflow: TextOverflow.ellipsis,
+        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                name,
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                desc,
                 style: TextStyle(fontSize: 12),
-              ))
-        ]),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                exp,
+                style: TextStyle(fontSize: 12),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextButton(
+                  onPressed: () async {
+                    var url = link;
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'couldnt launch $url';
+                    }
+                  },
+                  child: Text(
+                    'For More Details...',
+                    textWidthBasis: TextWidthBasis.parent,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 12),
+                  ))
+            ]),
       ),
     );
   }

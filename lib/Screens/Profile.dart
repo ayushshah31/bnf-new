@@ -11,7 +11,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   SingingCharacter? _character = SingingCharacter.debit;
   String dropValue = "ICICI";
   var cardNo = 0;
@@ -23,6 +22,75 @@ class _ProfileState extends State<Profile> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          Row(
+            children: [
+              Expanded(
+                  child: ElevatedButton(
+                child: Text("Add"),
+                onPressed: () {},
+              )),
+              SizedBox(
+                width: 15,
+              ),
+              Expanded(
+                  child: ElevatedButton(
+                child: Text("View"),
+                onPressed: () {},
+              )),
+            ],
+          ),
+          SizedBox(height: 15,),
+          TextField(
+            keyboardType: TextInputType.number,
+            textAlign: TextAlign.center,
+            onChanged: (value) {
+              setState(() {
+                cardNo = int.parse(value);
+              });
+            },
+            decoration: kTextFieldDecoration.copyWith(
+              hintText: 'Enter Card N0.',
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            children: [
+              Text(
+                "Choose bank:",
+                style: TextStyle(fontSize: 15),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              DropdownButton<String>(
+                value: dropValue,
+                items: <String>['ICICI', 'AXIS', 'BoB'].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(
+                      value,
+                    ),
+                  );
+                }).toList(),
+                onChanged: (val) {
+                  setState(() {
+                    dropValue = val!;
+                  });
+                },
+              ),
+            ],
+          ),
+          Text(
+            cardNo.toString(),
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
           Text(
             "Choose type of card:",
             style: TextStyle(fontSize: 15),
@@ -51,53 +119,7 @@ class _ProfileState extends State<Profile> {
               },
             ),
           ),
-          Row(
-            children: [
-              Text(
-                "Choose bank:",
-                style: TextStyle(fontSize: 15),
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              DropdownButton<String>(
-                value: dropValue,
-                items: <String>['ICICI', 'AXIS', 'BoB']
-                    .map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                    ),
-                  );
-                }).toList(),
-                onChanged: (val) {
-                  setState(() {
-                    dropValue = val!;
-                  });
-                },
-              ),
-            ],
-          ),
-          Text(
-            cardNo.toString(),
-            style: TextStyle(
-              fontSize: 20,
-            ),
-          ),
-          SizedBox(height: 30,),
-          TextField(
-            keyboardType: TextInputType.number,
-            textAlign: TextAlign.center,
-            onChanged: (value) {
-              setState(() {
-                cardNo = int.parse(value);
-              });
-            },
-            decoration: kTextFieldDecoration.copyWith(
-              hintText: 'Enter Card N0.',
-            ),
-          ),
+          ElevatedButton(onPressed: () {}, child: Text("Submit"))
         ],
       ),
     );

@@ -25,7 +25,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String cc = "";
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  int _selectedIndex=0;
+  int _selectedIndex = 0;
   late List<OfferDataModel> data;
 
   static List<Widget> _pages = [
@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
     OffersDisplay(),
   ];
 
-  void onItemTapped(int index){
+  void onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -44,50 +44,54 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Home"),
-          actions: [
-            ElevatedButton(
-              child: Text("Logout"),
-              onPressed: () {
-                _auth.signOut();
-                print("Signout");
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => WelcomeScreen()));
-              },
-            ),
-          ],
-        ),
-        body: _pages.elementAt(_selectedIndex),
-
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.card_membership),
-              label: 'Add Cards',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.camera),
-              label: 'Camera',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.local_offer),
-              label: 'Offers',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: onItemTapped,
-        ),
-        );
+      appBar: AppBar(
+        title: Text("Home"),
+        actions: [
+          ElevatedButton(
+            child: Text("Logout"),
+            onPressed: () {
+              _auth.signOut();
+              print("Signout");
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => WelcomeScreen()));
+            },
+          ),
+        ],
+      ),
+      body: _pages.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: Colors.black,
+        selectedLabelStyle: TextStyle(color: Colors.black),
+        unselectedLabelStyle: TextStyle(color: Colors.black),
+        selectedItemColor: Colors.black,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.card_membership,color: Colors.black,),
+            label: 'Add Cards',
+            
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.camera,color: Colors.black),
+            
+            label: 'Camera',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_offer,color: Colors.black),
+            label: 'Offers',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person,color: Colors.black),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: onItemTapped,
+      ),
+    );
   }
-
 }
-
-
-
