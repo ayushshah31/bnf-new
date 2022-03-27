@@ -2,6 +2,7 @@
 
 import 'package:bnf/Model/offerDataModel.dart';
 import 'package:bnf/components/cards.dart';
+import 'package:bnf/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:bnf/dataFetch/FirebaseFetch.dart';
 import 'package:modal_progress_hud_alt/modal_progress_hud_alt.dart';
@@ -39,6 +40,7 @@ class _OffersDisplayState extends State<OffersDisplay> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: blackColor,
       body: ModalProgressHUD(
         inAsyncCall: isLoading,
         child: SingleChildScrollView(
@@ -51,9 +53,9 @@ class _OffersDisplayState extends State<OffersDisplay> {
                   child: Text(
                     "Offers for AXIS BANK",
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                 ),
                 Container(

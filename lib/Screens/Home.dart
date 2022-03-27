@@ -51,9 +51,11 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
+        backgroundColor: blackColor,
         actions: [
           ElevatedButton(
             child: Text("Logout"),
+            style: ElevatedButton.styleFrom(primary: Colors.transparent),
             onPressed: () {
               _auth.signOut();
               print("Signout");
@@ -71,21 +73,22 @@ class _HomeState extends State<Home> {
         selectedItemColor: Colors.black,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.card_membership,color: Colors.black,),
+            icon: Icon(
+              Icons.card_membership,
+              color: Colors.black,
+            ),
             label: 'Add Cards',
-            
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.camera,color: Colors.black),
-            
+            icon: Icon(Icons.camera, color: Colors.black),
             label: 'Camera',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.local_offer,color: Colors.black),
+            icon: Icon(Icons.local_offer, color: Colors.black),
             label: 'Offers',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person,color: Colors.black),
+            icon: Icon(Icons.person, color: Colors.black),
             label: 'Profile',
           ),
         ],
