@@ -51,14 +51,17 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text("Home"),
+        title: Text("Home", style: TextStyle(fontFamily: 'OS'),),
         backgroundColor: blackColor,
         actions: [
-          ElevatedButton(
-            child: Text("Logout"),
-            style: ElevatedButton.styleFrom(primary: Colors.transparent),
-            onPressed: () {
+          IconButton(
+            icon: Icon(Icons.exit_to_app,
+            color: Colors.white,
+                              size: 20,),
+            
+             onPressed: () {
               _auth.signOut();
               print("Signout");
               Navigator.push(context,
@@ -67,6 +70,7 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
+       
       body: _pages.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.black,

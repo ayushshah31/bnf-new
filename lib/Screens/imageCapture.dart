@@ -59,26 +59,33 @@ class _ImageCaptureState extends State<ImageCapture> {
       backgroundColor: bgColor,
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Center(
+          child: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  child: Text("Capture Image",style: TextStyle(fontSize: 20),),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey.shade700),
-                  ),
+                 
+                Container(
+                  padding: EdgeInsets.only(right: 20),
+                  alignment: Alignment.center,
+                  child: IconButton(
+                  icon: Icon(Icons.camera_alt_rounded,
+            color: Colors.white,
+                              size: 50,),
+                 
                   onPressed: () {
                     captureImage();
                   },
-                ),
+                ),),
+                SizedBox(height: 30,),
                 Card(
-                  margin: EdgeInsets.all(10),
+                  margin: EdgeInsets.all(12),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(30)),
                   child: Container(
-                    margin: EdgeInsets.all(15),
+                    margin: EdgeInsets.all(10),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -113,7 +120,11 @@ class _ImageCaptureState extends State<ImageCapture> {
                               },
                             ),
                           )
-                              : Text("Click Button 👆🏻 for OCR"),
+                              : Text("Coupon Text", style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: "OS",
+                                  fontSize: 18,
+                                )),
                         ],
                       ),
                     ),

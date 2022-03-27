@@ -45,82 +45,86 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Hero(
-                  tag: 'logo',
-                  child: SizedBox(
-                    child: Image.asset('images/logo.png'),
-                    height: 60,
-                  ),
-                ),
-                SizedBox(
-                    width: 230.0,
-                    child: AnimatedTextKit(
-                        animatedTexts: [
-                          TypewriterAnimatedText(
-                            'Assistant',
-                            textStyle: const TextStyle(
-                              fontSize: 45.0,
-                              fontWeight: FontWeight.w900,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ],
-                        totalRepeatCount: 3,
-                        pause: const Duration(seconds: 2),
-                      ),
+            Center(
+              child: Row(
+                children: <Widget>[
+                  Hero(
+                    tag: 'logo',
+                    child: SizedBox(
+                      child: Image.asset('images/logo.png'),
+                      height: 60,
                     ),
-              ],
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  SizedBox(
+                      width: 190.0,
+                      child: AnimatedTextKit(
+                          animatedTexts: [
+                            TypewriterAnimatedText(
+                              'OfferIt',
+                              textStyle: const TextStyle(
+                              // fontFamily: 'OS',
+                                fontSize: 45.0,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ],
+                          totalRepeatCount: 3,
+                          pause: const Duration(seconds: 2),
+                        ),
+                      ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 48.0,
             ),
-            RoundedButton(
-                color: Colors.black54,
-                text: 'Log In',
-                onPressed: ()=>Navigator.pushNamed(context, LoginScreen.id)),
-            RoundedButton(
-                color: Colors.black87,
-                text: 'Register',
-                onPressed: ()=>Navigator.pushNamed(context, RegistrationScreen.id)
+            SizedBox(
+              width: 200,
+              child: ElevatedButton(
+                  // color: Colors.black54,
+                  // text: 'Log In',
+                  style: ButtonStyle(
+                                padding: MaterialStateProperty.all(
+                                    EdgeInsets.only(left: 9, right: 9)),
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.black87),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ))),
+                     child: Text('Log In',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "OS",
+                                  fontSize: 18,
+                                ))  ,         
+                  onPressed: ()=>Navigator.pushNamed(context, LoginScreen.id)),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(vertical: 16.0),
-            //   child: Material(
-            //     elevation: 5.0,
-            //     color: Colors.lightBlueAccent,
-            //     borderRadius: BorderRadius.circular(30.0),
-            //     child: MaterialButton(
-            //       onPressed: () {
-            //         Navigator.pushNamed(context, LoginScreen.id);
-            //       },
-            //       minWidth: 200.0,
-            //       height: 42.0,
-            //       child: const Text(
-            //         'Log In',
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(vertical: 16.0),
-            //   child: Material(
-            //     color: Colors.blueAccent,
-            //     borderRadius: BorderRadius.circular(30.0),
-            //     elevation: 5.0,
-            //     child: MaterialButton(
-            //       onPressed: () {
-            //         Navigator.pushNamed(context, RegistrationScreen.id);
-            //       },
-            //       minWidth: 200.0,
-            //       height: 42.0,
-            //       child: const Text(
-            //         'Register',
-            //       ),
-            //     ),
-            //   ),
-            // ),
+           ElevatedButton(
+                // color: Colors.black54,
+                // text: 'Log In',
+                style: ButtonStyle(
+                              // padding: MaterialStateProperty.all(
+                              //     EdgeInsets.only(left: 9, right: 9)),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.black87),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ))),
+                   child: Text('Register',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "OS",
+                                fontSize: 18,
+                              ))  ,         
+                 onPressed: ()=>Navigator.pushNamed(context, RegistrationScreen.id)),
+            
+         
           ],
         ),
       ),

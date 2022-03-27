@@ -13,12 +13,11 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   User? _currentUser = FirebaseAuth.instance.currentUser;
   late DatabaseReference mUserPointsRef;
   final databaseReference = FirebaseDatabase.instance.reference();
-  String name="";
-  String email="";
+  String name = "";
+  String email = "";
   List card = [];
 
   @override
@@ -30,18 +29,18 @@ class _ProfileState extends State<Profile> {
 
   List<Widget> cardDetails = <Widget>[];
 
-  void getData(AsyncSnapshot<DataSnapshot> snapshot) async{
-    String _bankName,_type;
+  void getData(AsyncSnapshot<DataSnapshot> snapshot) async {
+    String _bankName, _type;
     int _no;
 
     var card = snapshot.data!.value['Card'];
 
-    for(var i=0 ; i<card.length ; i++){
+    for (var i = 0; i < card.length; i++) {
       _bankName = card[i]['bank'];
       _no = card[i]['Num'];
       _type = card[i]['type'];
       cardDetails.add(Card(
-        margin: EdgeInsets.all(10),
+        margin: EdgeInsets.all(40),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 5,
         child: Padding(
@@ -50,16 +49,15 @@ class _ProfileState extends State<Profile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
                 Text(
-                  "Bank: "+_bankName,
+                  "Bank: " + _bankName,
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  "Number: "+_no.toString(),
+                  "Number: " + _no.toString(),
                   style: TextStyle(fontSize: 13),
                 ),
                 SizedBox(
@@ -82,40 +80,67 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<DataSnapshot>(
-        future: mUserPointsRef.child(_currentUser!.uid).get(),
-        builder: (context,snapshot){
-          if(snapshot.hasData){
-            getData(snapshot);
-            print(snapshot.data!.value.toString());
-            return Scaffold(
-              body: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      // crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(Icons.person,size: 100,),
-                        SizedBox(height: 10,),
-                        Text("Name: "+snapshot.data!.value['Name'].toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                        Text("Email: "+snapshot.data!.value['Email'].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-                        Text("Card Detail(s):",style: TextStyle(fontSize: 20),),
-                        SizedBox(height: 5,),
-                        Column(
-                          children: cardDetails,
-                        )
-                      ],
+          future: mUserPointsRef.child(_currentUser!.uid).get(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              getData(snapshot);
+              print(snapshot.data!.value.toString());
+              return Scaffold(
+                body: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipOval(
+                              child: Material(
+                            color: Colors.transparent,
+                            child: Ink.image(
+                              image: AssetImage(
+                                  'images/User_font_awesome.svg.png'),
+                              fit: BoxFit.cover,
+                              width: 128,
+                              height: 128,
+                              child: InkWell(onTap: () {}),
+                            ),
+                          )),
+                          // Icon(Icons.person,size: 100,),
+                          SizedBox(height: 10,),
+                          Text(snapshot.data!.value['Name'].toString(),style: TextStyle(color: Colors.black,
+                                  fontFamily: "OS",
+                                  fontSize: 18,fontWeight: FontWeight.bold),),
+                              SizedBox(height: 5,),      
+                          Text(
+                            
+                                snapshot.data!.value['Email'].toString(),
+                            style: TextStyle(color: Colors.black,
+                                  fontFamily: "OS",
+                                fontSize: 16, ),
+                          ),
+                           SizedBox(height: 5,),   
+                          Text(
+                            "Cards Stored:",
+                            style: TextStyle(fontSize: 20,color: Colors.black,
+                                  fontFamily: "OS",),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Column(
+                            children: cardDetails,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            );
-          }else{
-            return Center(child: CircularProgressIndicator());
-          }
-        }
-        ),
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          }),
     );
   }
 }

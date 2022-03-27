@@ -18,21 +18,35 @@ class _AddCardState extends State<AddCard> {
   String dropValue = "ICICI";
   var cardNo = 0;
   bool showAddCard = false;
-  static int cardCount=0;
+  int cardCount=0;
   bool creditBool = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(25.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
             children: [
+              SizedBox(height: 100,),
               Expanded(
                   child: ElevatedButton(
-                child: Text("Add"),
+                 style: ButtonStyle(
+                              
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.black87),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ))),
+                     child: Text('Add Card',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "OS",
+                                  fontSize: 18,
+                                ))  ,    
                 onPressed: ()=>setState(()=>showAddCard=true),
               )),
               SizedBox(
@@ -40,21 +54,32 @@ class _AddCardState extends State<AddCard> {
               ),
               Expanded(
                   child: ElevatedButton(
-                child: Text("View"),
+                 style: ButtonStyle(
+                              
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.black87),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ))),
+                     child: Text('View Cards',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "OS",
+                                  fontSize: 18,
+                                ))  ,    
                 onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile()));},
               )),
             ],
           ),
           SizedBox(height: 15,),
-
-          SizedBox(
-            height: 15,
-          ),
           Row(
             children: [
               Text(
-                "Choose bank:",
-                style: TextStyle(fontSize: 15),
+                "Bank:",
+                style: TextStyle(fontSize: 20,
+                fontFamily: 'OS',
+                fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 width: 20,
@@ -66,6 +91,11 @@ class _AddCardState extends State<AddCard> {
                     value: value,
                     child: Text(
                       value,
+                      style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: "OS",
+                                            fontSize: 17,
+                                          )
                     ),
                   );
                 }).toList(),
@@ -80,12 +110,19 @@ class _AddCardState extends State<AddCard> {
           SizedBox(
             height: 30,
           ),
-          Text(
-            "Choose type of card:",
-            style: TextStyle(fontSize: 15),
-          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            child:Text(
+                "Type of Card:",
+                style: TextStyle(fontSize: 20,
+                fontFamily: 'OS',
+                fontWeight: FontWeight.bold),
+              ),),
           ListTile(
-            title: const Text('Debit'),
+            title: const Text('Debit',style: TextStyle(
+              fontSize: 20,
+                fontFamily: 'OS',
+            ),),
             leading: Radio<SingingCharacter>(
               value: SingingCharacter.debit,
               groupValue: _character,
@@ -98,7 +135,9 @@ class _AddCardState extends State<AddCard> {
             ),
           ),
           ListTile(
-            title: const Text('Credit'),
+            title: const Text('Credit',style: TextStyle(
+              fontSize: 20,
+                fontFamily: 'OS',)),
             leading: Radio<SingingCharacter>(
               value: SingingCharacter.credit,
               groupValue: _character,
@@ -110,6 +149,8 @@ class _AddCardState extends State<AddCard> {
               },
             ),
           ),
+          SizedBox(height: 
+          9,),
           showAddCard?TextFormField(
             validator: (value){
               if(value!.length < 16 || value.length>16 ){
@@ -145,7 +186,20 @@ class _AddCardState extends State<AddCard> {
                 .child("Card").child(cardCount.toString()).child("bank").set(dropValue);
             cardCount++;
             print("Added");
-          }, child: Text("Submit")):Text(""),
+          }, 
+           style: ButtonStyle(
+                              
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.black87),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ))),child: Text('Add',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "OS",
+                                  fontSize: 15,
+                                ))):Text(""),
         ],
       ),
     );
