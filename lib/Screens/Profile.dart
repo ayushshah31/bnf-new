@@ -34,13 +34,13 @@ class _ProfileState extends State<Profile> {
     int _no;
 
     var card = snapshot.data!.value['Card'];
-    print(card);
-    for (var i = 0; i < card.length; i++) {
-      _bankName = card[i]['bank'];
-      _no = card[i]['Num'];
-      _type = card[i]['type'];
+    print("card: "+card.toString());
+    for (var i in card.values) {
+      _bankName = i['bank'];
+      _no = i['Num'];
+      _type = i['type'];
       cardDetails.add(Card(
-        margin: EdgeInsets.all(40),
+        margin: EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 5,
         child: Padding(
@@ -51,21 +51,21 @@ class _ProfileState extends State<Profile> {
               children: [
                 Text(
                   "Bank: " + _bankName,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
                   "Number: " + _no.toString(),
-                  style: TextStyle(fontSize: 13),
+                  style: TextStyle(fontSize: 15),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
                   "Type: " + _type,
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 15),
                 ),
                 SizedBox(
                   height: 10,
