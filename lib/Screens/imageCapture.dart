@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bnf/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
@@ -50,30 +51,45 @@ class _ImageCaptureState extends State<ImageCapture> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bgColor,
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                child: Text("Capture Image"),
-                onPressed: () {
-                  captureImage();
-                  setState(() {
-                    show_image = false;
-                    displayText = "";
-                  });
-                },
-              ),
-              Text(displayText),
-              show_image
-                  ? Image.file(
-                      imagePath,
-                      fit: BoxFit.fill,
-                    )
-                  : Text("Image here"),
-            ],
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  child: Text("Capture Image"),
+                  onPressed: () {
+                    captureImage();
+                    setState(() {
+                      show_image = false;
+                      displayText = "";
+                    });
+                  },
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(displayText),
+                        show_image
+                            ? Image.file(
+                                imagePath,
+                                fit: BoxFit.fill,
+                              )
+                            : Text("Click Picture for OCR"),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

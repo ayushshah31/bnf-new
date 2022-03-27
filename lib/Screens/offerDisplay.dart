@@ -33,14 +33,14 @@ class _OffersDisplayState extends State<OffersDisplay> {
       isLoading = false;
     });
     data.forEach((element) {
-      print(element.brandName);
+      // print(element.brandName);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: blackColor,
+      backgroundColor: bgColor,
       body: ModalProgressHUD(
         inAsyncCall: isLoading,
         child: SingleChildScrollView(
@@ -59,18 +59,22 @@ class _OffersDisplayState extends State<OffersDisplay> {
                   ),
                 ),
                 Container(
-                  height: 170,
+                  height: 200,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: data.length,
                     itemBuilder: (BuildContext context, int i) {
                       return Row(
                         children: [
-                          Cards(
-                            desc: data[i].details,
-                            exp: data[i].dueDate,
-                            link: data[i].url,
-                            name: data[i].brandName,
+                          Container(
+                            width: 350,
+                            
+                            child: Cards(
+                              desc: data[i].details,
+                              exp: data[i].dueDate,
+                              link: data[i].url,
+                              name: data[i].brandName,
+                            ),
                           ),
                         ],
                       );

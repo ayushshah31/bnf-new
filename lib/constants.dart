@@ -36,3 +36,4 @@ const kTextFieldDecoration = InputDecoration(
 );
 
 Color blackColor= Colors.black87;
+Color bgColor= Colors.black87;
