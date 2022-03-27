@@ -31,43 +31,42 @@ class _ProfileState extends State<Profile> {
   List<Widget> cardDetails = <Widget>[];
 
   void getData(AsyncSnapshot<DataSnapshot> snapshot) async{
-    String _bankName,_no,_type;
+    String _bankName,_type;
+    int _no;
 
     var card = snapshot.data!.value['Card'];
 
-    for(LinkedHashMap i in card){
-      _bankName = i['bank'];
-      _no = i['Num'];
-      _type = i['type'];
+    for(var i=0 ; i<card.length ; i++){
+      _bankName = card[i]['bank'];
+      _no = card[i]['Num'];
+      _type = card[i]['type'];
       cardDetails.add(Card(
         margin: EdgeInsets.all(10),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 5,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+          padding: const EdgeInsets.fromLTRB(15, 10, 30, 10),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: 20,
-                ),
+
                 Text(
-                  _bankName,
+                  "Bank: "+_bankName,
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  _no,
+                  "Number: "+_no.toString(),
                   style: TextStyle(fontSize: 13),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  _type,
+                  "Type: " + _type,
                   style: TextStyle(fontSize: 12),
                 ),
                 SizedBox(
@@ -89,23 +88,31 @@ class _ProfileState extends State<Profile> {
             getData(snapshot);
             print(snapshot.data!.value.toString());
             return Scaffold(
-              body: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Icon(Icons.person),
-                    SizedBox(height: 10,),
-                    Text("Name: "+snapshot.data!.value['Name'].toString()),
-                    Text("Email: "+snapshot.data!.value['Email'].toString()),
-                    Column(
-                      children: cardDetails,
-                    )
-                  ],
+              body: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(Icons.person,size: 100,),
+                        SizedBox(height: 10,),
+                        Text("Name: "+snapshot.data!.value['Name'].toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        Text("Email: "+snapshot.data!.value['Email'].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                        Text("Card Detail(s):",style: TextStyle(fontSize: 20),),
+                        SizedBox(height: 5,),
+                        Column(
+                          children: cardDetails,
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
             );
           }else{
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           }
         }
         ),

@@ -46,8 +46,8 @@ class FirebaseFetch{
     // }
   }
 
-  Future<List<OfferDataModel>> getEvents() async {
-    var result = (await databaseReference.child("Bank").child("Axis").once()).value;
+  Future<List<OfferDataModel>> getEvents(String bankName) async {
+    var result = (await databaseReference.child("Bank").child(bankName).once()).value;
     print(result.runtimeType);
     List<OfferDataModel> events = [];
     for (LinkedHashMap child in result) {
