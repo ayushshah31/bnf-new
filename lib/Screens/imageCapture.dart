@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 import 'package:bnf/constants.dart';
 import 'package:flutter/material.dart';
@@ -72,19 +74,22 @@ class _ImageCaptureState extends State<ImageCapture> {
                 Card(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(displayText),
-                        show_image
-                            ? Image.file(
-                                imagePath,
-                                fit: BoxFit.fill,
-                              )
-                            : Text("Click Picture for OCR"),
-                      ],
+                  child: Container(
+                    margin: EdgeInsets.all(15),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Converted Text: $displayText'),
+                          show_image
+                              ? Image.file(
+                                  imagePath,
+                                  fit: BoxFit.fill,
+                                )
+                              : Text("Click Picture for OCR"),
+                        ],
+                      ),
                     ),
                   ),
                 ),
