@@ -36,6 +36,13 @@ class _HomeState extends State<Home> {
     Profile(),
   ];
 
+  List<String> title = [
+    "Add Cards",
+    "Camera",
+    "Offers",
+    "Profile"
+  ];
+
   void onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -53,7 +60,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text("Home", style: TextStyle(fontFamily: 'OS'),),
+        title: Text(title[_selectedIndex], style: TextStyle(fontFamily: 'OS'),),
         backgroundColor: blackColor,
         actions: [
           IconButton(

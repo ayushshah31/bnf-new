@@ -34,7 +34,7 @@ class _ProfileState extends State<Profile> {
     int _no;
 
     var card = snapshot.data!.value['Card'];
-
+    print(card);
     for (var i = 0; i < card.length; i++) {
       _bankName = card[i]['bank'];
       _no = card[i]['Num'];

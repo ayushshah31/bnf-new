@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:collection';
+
 import 'package:bnf/Model/offerDataModel.dart';
 import 'package:bnf/components/cards.dart';
 import 'package:bnf/constants.dart';
@@ -21,6 +23,7 @@ class _OffersDisplayState extends State<OffersDisplay> {
   bool isLoading = true;
   List<OfferDataModel> data = <OfferDataModel>[];
   String message = "Please add a card first to View Offers";
+  late String bankName ;
 
   @override
   void initState() {
@@ -30,15 +33,28 @@ class _OffersDisplayState extends State<OffersDisplay> {
   }
 
   void fns() async {
-    try{
+    // try{
       User? mFirebaseUser = FirebaseAuth.instance.currentUser;
       final databaseReference =
       FirebaseDatabase.instance.reference();
       DatabaseReference mUserPointsRef = databaseReference.child('User');
-      String bankName = mUserPointsRef
+      dynamic result =  (await mUserPointsRef
           .child(mFirebaseUser!.uid)
-          .child("Card")
-          .child("0").child("bank").get().toString();
+          .child("Card").once()).value;
+      print(result.values.runtimeType);
+
+      // for(LinkedHashMap i in result){
+      //   print(i);
+      //   break;
+      // }
+
+      for( var i in result.values){
+        bankName = i['bank'];
+        break;
+      }
+
+      // print(bankName);
+      // print(bankName);
       FirebaseFetch dataFetch = FirebaseFetch();
       data = await dataFetch.getEvents(bankName);
       setState(() {
@@ -47,11 +63,11 @@ class _OffersDisplayState extends State<OffersDisplay> {
       data.forEach((element) {
         // print(element.brandName);
       });
-    } catch(e){
-      setState(() {
-        message = e.toString();
-      });
-    }
+    // } catch(e){
+    //   setState(() {
+    //     message = e.toString();
+    //   });
+    // }
 
   }
 
@@ -69,7 +85,7 @@ class _OffersDisplayState extends State<OffersDisplay> {
                 Container(
                   margin: EdgeInsets.all(10),
                   child: Text(
-                    isLoading?message:"Offers for AXIS BANK",
+                    isLoading?message:"Offers for $bankName BANK",
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -77,15 +93,15 @@ class _OffersDisplayState extends State<OffersDisplay> {
                   ),
                 ),
                 Container(
-                  height: 200,
+                  height: 550,
                   child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
+                    scrollDirection: Axis.vertical,
                     itemCount: data.length,
                     itemBuilder: (BuildContext context, int i) {
                       return Row(
                         children: [
                           Container(
-                            width: 350,
+                            width: 380,
                             
                             child: Cards(
                               desc: data[i].details,

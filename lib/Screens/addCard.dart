@@ -86,7 +86,7 @@ class _AddCardState extends State<AddCard> {
               ),
               DropdownButton<String>(
                 value: dropValue,
-                items: <String>['ICICI', 'AXIS', 'BoB'].map((String value) {
+                items: <String>['ICICI', 'AXIS', 'BOB'].map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(
@@ -177,14 +177,13 @@ class _AddCardState extends State<AddCard> {
             mUserPointsRef
                 .child(mFirebaseUser!.uid)
                 .child("Card")
-                .child(cardCount.toString()).child("Num").set(cardNo);
+                .child(mFirebaseUser.hashCode.toString()).child("Num").set(cardNo);
             mUserPointsRef
                 .child(mFirebaseUser.uid)
-                .child("Card").child(cardCount.toString()).child("type").set(creditBool?"Credit":"Debit");
+                .child("Card").child(mFirebaseUser.hashCode.toString()).child("type").set(creditBool?"Credit":"Debit");
             mUserPointsRef
                 .child(mFirebaseUser.uid)
-                .child("Card").child(cardCount.toString()).child("bank").set(dropValue);
-            cardCount++;
+                .child("Card").child(mFirebaseUser.hashCode.toString()).child("bank").set(dropValue);
             print("Added");
           }, 
            style: ButtonStyle(

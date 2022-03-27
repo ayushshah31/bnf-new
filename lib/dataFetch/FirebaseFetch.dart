@@ -47,8 +47,9 @@ class FirebaseFetch{
   }
 
   Future<List<OfferDataModel>> getEvents(String bankName) async {
-    var result = (await databaseReference.child("Bank").child(bankName).once()).value;
-    print(result.runtimeType);
+    print("bankNAme: "+bankName);
+    var result = (await databaseReference.child("Bank").child(bankName.toUpperCase()).once()).value;
+    print("result ff: "+result.toString());
     List<OfferDataModel> events = [];
     for (LinkedHashMap child in result) {
       OfferDataModel user = new OfferDataModel();
