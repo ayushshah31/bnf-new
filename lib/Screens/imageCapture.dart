@@ -20,13 +20,14 @@ class _ImageCaptureState extends State<ImageCapture> {
   String finalText = "";
   String displayText = "";
   List<String> textList = [];
+  List<File> imagePathList = [];
   late File imagePath;
   void captureImage() async {
     XFile? image =
         await _capture.pickImage(source: ImageSource.camera, imageQuality: 100);
     setState(() {
       path = image?.path.toString();
-      imagePath = File(image!.path);
+      imagePathList.add(File(image!.path));
     });
     textDetection();
   }
@@ -70,10 +71,6 @@ class _ImageCaptureState extends State<ImageCapture> {
                   ),
                   onPressed: () {
                     captureImage();
-                    setState(() {
-                      show_image = false;
-                      displayText = "";
-                    });
                   },
                 ),
                 Card(
@@ -87,13 +84,36 @@ class _ImageCaptureState extends State<ImageCapture> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Converted Text: $displayText'),
                           show_image
-                              ? Image.file(
-                                  imagePath,
-                                  fit: BoxFit.fill,
-                                )
-                              : Text("Click Picture for OCR"),
+                              ? Container(
+                            height: 490,
+                            child: ListView.separated(
+                              scrollDirection: Axis.vertical,
+                              itemCount: textList.length,
+                              itemBuilder: (BuildContext context, int i) {
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("\nImage ${i+1} Converted Text:-",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                                    Text(DateTime.now().toString(),style: TextStyle(fontSize: 18),),
+                                    SizedBox(height: 5,),
+                                    Text(textList[i]),
+                                    Text("Captured Image:",style: TextStyle(fontSize: 20),),
+                                    Image.file(
+                                    imagePathList[i],
+                                    fit: BoxFit.fill,
+                                    ),
+                                  ],
+                                );
+                              },
+                              separatorBuilder: (BuildContext context, int index) {
+                                return SizedBox(
+                                  width: 10,
+                                );
+                              },
+                            ),
+                          )
+                              : Text("Click Button 👆🏻 for OCR"),
                         ],
                       ),
                     ),

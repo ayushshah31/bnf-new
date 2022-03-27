@@ -19,6 +19,7 @@ class _AddCardState extends State<AddCard> {
   var cardNo = 0;
   bool showAddCard = false;
   static int cardCount=0;
+  bool creditBool = false;
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +92,7 @@ class _AddCardState extends State<AddCard> {
               onChanged: (SingingCharacter? value) {
                 setState(() {
                   _character = value;
+                  creditBool = false;
                 });
               },
             ),
@@ -103,6 +105,7 @@ class _AddCardState extends State<AddCard> {
               onChanged: (SingingCharacter? value) {
                 setState(() {
                   _character = value;
+                  creditBool = true;
                 });
               },
             ),
@@ -133,12 +136,15 @@ class _AddCardState extends State<AddCard> {
             mUserPointsRef
                 .child(mFirebaseUser!.uid)
                 .child("Card")
-                .child(cardCount.toString()).set(cardNo);
+                .child(cardCount.toString()).child("Num").set(cardNo);
+            mUserPointsRef
+                .child(mFirebaseUser.uid)
+                .child("Card").child(cardCount.toString()).child("type").set(creditBool?"Credit":"Debit");
+            mUserPointsRef
+                .child(mFirebaseUser.uid)
+                .child("Card").child(cardCount.toString()).child("bank").set(dropValue);
             cardCount++;
             print("Added");
-            setState(() {
-              cardNo = 0;
-            });
           }, child: Text("Submit")):Text(""),
         ],
       ),
