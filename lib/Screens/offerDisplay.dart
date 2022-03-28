@@ -93,7 +93,7 @@ class _OffersDisplayState extends State<OffersDisplay> {
                   ),
                 ),
                 Container(
-                  height: 550,
+                  height: 730,
                   child: ListView.separated(
                     scrollDirection: Axis.vertical,
                     itemCount: data.length,
@@ -101,7 +101,7 @@ class _OffersDisplayState extends State<OffersDisplay> {
                       return Row(
                         children: [
                           Container(
-                            width: 380,
+                            width: 400,
                             
                             child: Cards(
                               desc: data[i].details,

@@ -52,11 +52,11 @@ class Cards extends StatelessWidget {
               TextButton(
                   onPressed: () async {
                     var url = link;
-                    if (await canLaunch(url)) {
+                    // if (await canLaunch(url)) {
                       await launch(url);
-                    } else {
-                      throw 'couldnt launch $url';
-                    }
+                    // } else {
+                    //   throw 'couldnt launch $url';
+                    // }
                   },
                   child: Text(
                     'For More Details...',

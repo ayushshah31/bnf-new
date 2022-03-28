@@ -21,6 +21,37 @@ class _AddCardState extends State<AddCard> {
   int cardCount=0;
   bool creditBool = false;
 
+  Future<void> showMessage(String message) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Alert!!!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(message,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -185,6 +216,7 @@ class _AddCardState extends State<AddCard> {
                 .child(mFirebaseUser.uid)
                 .child("Card").child(mFirebaseUser.hashCode.toString()).child("bank").set(dropValue);
             print("Added");
+            showMessage("Card Added");
           }, 
            style: ButtonStyle(
                               
